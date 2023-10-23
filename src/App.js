@@ -1,24 +1,38 @@
-import logo from './logo.svg';
+import React,{useState} from 'react';
 import './App.css';
+import Description from './components/Description';
+import Input from './components/Input';
+import DesContextProvide from './components/Contexts/DescriptionContextProvider';
+import HeaderBill from './components/Cart/HeaderBillButton';
+import Cart from './components/Cart/Cart';
+import CartContexProvider from './components/Contexts/CartContexProvider';
 
 function App() {
+const [showBill,setShowbill] = useState(false)
+
+const showBillHandler = ()=>{
+    setShowbill(true)
+}
+const closeBillHandler = ()=>{
+   setShowbill(false)
+}
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <CartContexProvider>
+    <DesContextProvide>
+      
+     {showBill && <Cart close={closeBillHandler}/>}
+    <div className="app">
+    <HeaderBill  show={showBillHandler}/>
+      <Input ></Input>
+      <div className='app'>
+        
+      <Description></Description>
+    
+      </div>
     </div>
+    
+    </DesContextProvide>
+    </CartContexProvider>
   );
 }
 
